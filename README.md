@@ -25,43 +25,18 @@ Predict the CO2 emission of a car where the weight is 2300kg, and the volume is 
 
 ## Program:
 ```
-import matplotlib.pyplot as plt
+import pandas as pd
 from sklearn import linear_model
-from sklearn.datasets import fetch_california_housing
-from sklearn.model_selection import train_test_split
-# Load dataset
-data = fetch_california_housing()
-# Feature matrix and target
-X = data.data
-y = data.target
-# Split data
-X_train, X_test, y_train, y_test = train_test_split(
-    X, y, test_size=0.4, random_state=1)
-# Create model
-reg = linear_model.LinearRegression()
-# Train model
-reg.fit(X_train, y_train)
-# Coefficients
-print("Coefficients:", reg.coef_)
-# Accuracy score
-print("Variance score:", reg.score(X_test, y_test))
-# Plot style
-plt.style.use('fivethirtyeight')
-# Training residuals
-plt.scatter(reg.predict(X_train),
-            reg.predict(X_train)-y_train,
-            color='green', s=10, label='Train data')
-# Testing residuals
-plt.scatter(reg.predict(X_test),
-            reg.predict(X_test)-y_test,
-            color='blue', s=10, label='Test data')
-# Zero residual line
-plt.hlines(y=0, xmin=0, xmax=6, linewidth=2)
-# Legend and title
-plt.legend(loc='upper right')
-plt.title("Residual Errors")
-plt.show()
-
+df = pd.read_csv("car (1).csv")
+X = df[['Weight', 'Volume']]
+y = df['CO2']
+regr = linear_model.LinearRegression()
+regr.fit(X, y)
+print('Coefficients:', regr.coef_)
+print('Intercept:', regr.intercept_)
+input_data = pd.DataFrame({'Weight': [3300], 'Volume': [1300]})
+predictedCO2 = regr.predict(input_data)
+print('Predicted CO2 for the corresponding weight and volume:', predictedCO2)
 
 
 
