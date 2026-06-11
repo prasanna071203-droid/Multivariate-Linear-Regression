@@ -27,7 +27,7 @@ Predict the CO2 emission of a car where the weight is 2300kg, and the volume is 
 ```
 import pandas as pd
 from sklearn import linear_model
-df = pd.read_csv("carsemission.csv")
+df = pd.read_csv("car (1).csv")
 X = df[['Weight', 'Volume']]
 y = df['CO2']
 regr = linear_model.LinearRegression()
